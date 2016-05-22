@@ -14,6 +14,9 @@ As a first step to alleviate this problem, PyGuile allows scripts written
 in Scheme and executed by Guile to invoke Python libraries.  This makes
 the rich library ecosystem of Python available also to Guile users.
 
+Blog articles about the package and the philosophy guiding it:
+http://www.zak.co.il/tddpirate/category/pyguile/
+
 ## Audience
 If you think that Scheme is the best programming language in which to
 implement your application, but you are held back due to lack of libraries
