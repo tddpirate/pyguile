@@ -1,0 +1,33 @@
+Installation Instructions
+*************************
+
+Copyright (C) 2008 Omer Zak.
+
+This file is free documentation; Omer Zak gives unlimited permission to
+copy, distribute and modify it.
+
+Dependencies
+============
+Before installing the package, ensure that you have the following
+dependencies installed:
+1. Python 2.4.x (if you use a different version of Python, edit the
+   values assigned to PYINC and PYLIB in the Makefile).
+2. The CPAN module TAP::Harness (only if you intend to run tests).
+   If necessary, edit the value assigned to TEST_LIBDIRS to point
+   at the lib directory where this package is installed.
+3. Guile 1.6.x (if you use a different version of Guile and encounter
+   problems, let me know about this).
+
+Basic Installation
+==================
+1. Gunzip and untar the archive file into a directory.
+   You will see a subdirectory having name of the form pyguile-x.y.z.
+2. `cd' into this subdirectory.
+3. Type `make' to build the library file `libpyguile.so'.
+4. Optionally, type `make check' to run the package's self tests.
+5. Currently, there is no `make install'.
+   You'll have to manually copy the library file `libpyguile.so' and
+   the module definition file `pyguile.scm' to a location where they
+   will be found by Guile.
+   You can obtain the locations searched by Guile by invoking the
+   command `(display %load-path)(newline)'.

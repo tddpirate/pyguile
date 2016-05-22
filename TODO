@@ -1,0 +1,37 @@
+Roadmap for future PyGuile versions:
+
+* Make PyGuile work with Python 2.7, Python 3, guile 1.8, and guile 2.0.
+
+* Option for turning on/off verbosity.
+  Infrastructure: DONE
+  Modules: DONE (except for two functions in pytoguile.c)
+  Testing: partially done
+
+* Allow Python objects (PyObject *) to own Guile objects (SCM).
+  Function objects: DONE
+  Objects with attributes: not done (implemented but not tested)
+
+* Allow Python code to invoke Guile functions.
+  DONE.
+
+* Macros which will allow Python code to be invoked from Guile without
+  special keywords or data formats.  Introspection of imported Python
+  modules to allow Guile to recognize Python code without having to do
+  anything special.
+  - Also, natural way to set/fetch values of Python variables.
+
+* Support for lazy conversion between heavy Python and Guile values
+
+Roadmap for the build process:
+
+* libtool/Autoconf/Automake
+
+* Deb packaging auxiliary files
+
+* RPM packaging auxiliary files
+
+Roadmap for other similar libraries:
+
+* Support for invoking Perl code from Guile.
+
+* Support for other Scheme implementations.

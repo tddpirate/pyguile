@@ -1,0 +1,4 @@
+Shlomi Fish <shlomif@iglu.org.il>
+        * For the initial impetus for actually working on the project.
+	* For testing an initial version of PyGuile on a system with
+	  Python2.5 and Guile 1.8.5.
