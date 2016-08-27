@@ -86,12 +86,8 @@ pytoguile.inc: pytoguile.c $(EXTRACT_CONVERSION_FUNCTIONS_PY)
 pyguile.scm: pyguile.scm.in guiletopy.c pytoguile.c $(EXTRACT_CONVERSION_FUNCTIONS_PY)
 	cat guiletopy.c pytoguile.c | $(EXTRACT_CONVERSION_EXPORTS) > $@
 
-version.h: BUILD
-	touch BUILD
-	mv BUILD BUILD~
-	echo $$(( 1 + `cat BUILD~` )) > BUILD
+version.h:
 	echo "#define PYGUILE_VERSION \"0.3.1\"" > $@
-	echo "#define PYGUILE_BUILD \""`cat $<`"\"" >> $@
 
 .build:
 	echo 1 > $@
