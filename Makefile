@@ -59,7 +59,7 @@ EXTRACT_CONVERSION_EXPORTS = python $(EXTRACT_CONVERSION_FUNCTIONS_PY) --scm pyg
 CDEBUG = -g -Wall
 CFLAGS = $(CDEBUG) `guile-config compile` $(PYINC) $(GCOVFLAGS)
 CPPFLAGS = `guile-config compile` $(PYINC)
-LDFLAGS = `guile-config link` $(GCOVFLAGS)
+LDFLAGS = $(shell guile-config link) $(GCOVFLAGS) -Wl,-rpath="$(shell python-config --prefix)/lib"
 RM = rm -v
 
 
