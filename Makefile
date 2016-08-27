@@ -45,7 +45,7 @@
 #PYVERSION = `python -V 2>&1 | cut -d\  -f2 | cut -d. -f1-2`
 PYVERSION = `python -c "import sys;sys.stdout.write(sys.version[:3])"`
 
-PYINC = -I/usr/include/python$(PYVERSION)
+PYINC = $(shell python-config --includes)
 PYLIB = -lpython$(PYVERSION)
 PERL = /usr/bin/perl
 TEST_VERBOSE = 0
