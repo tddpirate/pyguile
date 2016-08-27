@@ -26,7 +26,6 @@
 //#include <libguile.h>   // included in guiletopy.h
 #include "guiletopy.h"
 #include "pysmob.h"
-#include <guile/gh.h>
 #include "g2p2g_smob.h"   // used in guiletopy.inc
 #include "verbose.h"
 #include "pyscm.h"
