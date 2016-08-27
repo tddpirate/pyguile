@@ -461,7 +461,7 @@ python_import(SCM smodulename)
 SCM
 pyguile_version(void)
 {
-  return(scm_makfrom0str("PyGuile Version " PYGUILE_VERSION ", Build " PYGUILE_BUILD));
+  return(scm_makfrom0str("PyGuile Version " PYGUILE_VERSION));
 }
 
 void
