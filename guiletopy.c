@@ -26,7 +26,6 @@
 //#include <libguile.h>   // included in guiletopy.h
 #include "guiletopy.h"
 #include "pysmob.h"
-#include <guile/gh.h>
 #include "g2p2g_smob.h"   // used in guiletopy.inc
 #include "verbose.h"
 #include "pyscm.h"
@@ -348,7 +347,7 @@ g2p_bignum2Long(SCM sobj,SCM stemplate)
     }
     SCM swrite_proc = scm_variable_ref(scm_c_lookup("write"));
     SCM sbignumstr = scm_object_to_string(sobj,swrite_proc);
-    char *pstr = gh_scm2newstr(sbignumstr,NULL);
+    char *pstr = scm_to_locale_string(sbignumstr);
     if (NULL == pstr) {
       scm_memory_error("g2p_bignum2Long");  // NOT COVERED BY TESTS
     }
@@ -688,7 +687,7 @@ g2p_string2String(SCM sobj,SCM stemplate)
     if (pyguile_verbosity_test(PYGUILE_VERBOSE_G2P2G_SUCCESSFUL)) {
       scm_simple_format(scm_current_output_port(),scm_makfrom0str("# g2p_string2String: successful conversion of ~S into a Python String value\n"),scm_list_1(sobj));
     }
-    PyObject *pstr = PyString_FromStringAndSize(SCM_STRING_CHARS(sobj),SCM_STRING_LENGTH(sobj));
+    PyObject *pstr = PyString_FromStringAndSize(scm_to_locale_string(sobj),SCM_STRING_LENGTH(sobj));
     if (NULL == pstr) {
       scm_memory_error("g2p_string2String");  // NOT COVERED BY TESTS
     }

@@ -45,7 +45,7 @@
 #PYVERSION = `python -V 2>&1 | cut -d\  -f2 | cut -d. -f1-2`
 PYVERSION = `python -c "import sys;sys.stdout.write(sys.version[:3])"`
 
-PYINC = -I/usr/include/python$(PYVERSION)
+PYINC = $(shell python-config --includes)
 PYLIB = -lpython$(PYVERSION)
 PERL = /usr/bin/perl
 TEST_VERBOSE = 0
@@ -53,13 +53,13 @@ TEST_FILES = t/*.t
 TEST_LIBDIRS =
 RUN_GUILE_TESTS = ./t/scripts/RunGuileTests.pl
 EXTRACT_CONVERSION_FUNCTIONS_PY = ./extract_conversion_functions.py
-EXTRACT_CONVERSION_FUNCTIONS = $(EXTRACT_CONVERSION_FUNCTIONS_PY) --inc
-EXTRACT_CONVERSION_EXPORTS = $(EXTRACT_CONVERSION_FUNCTIONS_PY) --scm pyguile.scm.in
+EXTRACT_CONVERSION_FUNCTIONS = python $(EXTRACT_CONVERSION_FUNCTIONS_PY) --inc
+EXTRACT_CONVERSION_EXPORTS = python $(EXTRACT_CONVERSION_FUNCTIONS_PY) --scm pyguile.scm.in
 
 CDEBUG = -g -Wall
 CFLAGS = $(CDEBUG) `guile-config compile` $(PYINC) $(GCOVFLAGS)
 CPPFLAGS = `guile-config compile` $(PYINC)
-LDFLAGS = `guile-config link` $(GCOVFLAGS)
+LDFLAGS = $(shell guile-config link) $(GCOVFLAGS) -Wl,-rpath="$(shell python-config --prefix)/lib"
 RM = rm -v
 
 
@@ -86,12 +86,8 @@ pytoguile.inc: pytoguile.c $(EXTRACT_CONVERSION_FUNCTIONS_PY)
 pyguile.scm: pyguile.scm.in guiletopy.c pytoguile.c $(EXTRACT_CONVERSION_FUNCTIONS_PY)
 	cat guiletopy.c pytoguile.c | $(EXTRACT_CONVERSION_EXPORTS) > $@
 
-version.h: BUILD
-	touch BUILD
-	mv BUILD BUILD~
-	echo $$(( 1 + `cat BUILD~` )) > BUILD
+version.h:
 	echo "#define PYGUILE_VERSION \"0.3.1\"" > $@
-	echo "#define PYGUILE_BUILD \""`cat $<`"\"" >> $@
 
 .build:
 	echo 1 > $@

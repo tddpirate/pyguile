@@ -28,7 +28,6 @@
 #include "pytoguile.h"
 #include "guiletopy.h"
 #include "pysmob.h"
-#include <guile/gh.h>
 #include "g2p2g_smob.h"
 #include "verbose.h"
 #include "pyscm.h"
@@ -342,7 +341,7 @@ python_eval(SCM sobj,SCM smode)
     ? Py_file_input
     : Py_eval_input;
 
-  char *pstr = gh_scm2newstr(sobj,NULL);
+  char *pstr = scm_to_locale_string(sobj);
   if (NULL == pstr) {
     scm_memory_error("python-eval");  // NOT COVERED BY TESTS
     //return(SCM_UNSPECIFIED);
@@ -415,7 +414,7 @@ python_import(SCM smodulename)
     scm_wrong_type_arg("python-import",SCM_ARG1,smodulename);
   }
   else {
-    char *mname = gh_scm2newstr(smodulename,NULL);
+    char *mname = scm_to_locale_string(smodulename);
     PyObject *pmodule = PyImport_ImportModule(mname);
     PyObject *pexception = PyErr_Occurred();
     if (pexception) {
@@ -462,7 +461,7 @@ python_import(SCM smodulename)
 SCM
 pyguile_version(void)
 {
-  return(scm_makfrom0str("PyGuile Version " PYGUILE_VERSION ", Build " PYGUILE_BUILD));
+  return(scm_makfrom0str("PyGuile Version " PYGUILE_VERSION));
 }
 
 void
