@@ -6,9 +6,18 @@
 *.obj
 *.elf
 
+# Python binaries
+*.pyc
+
 # Precompiled Headers
 *.gch
 *.pch
+
+# Intermediate files
+*.d
+guiletopy.inc
+pytoguile.inc
+version.h
 
 # Libraries
 *.lib
@@ -29,6 +38,7 @@
 *.i*86
 *.x86_64
 *.hex
+pyguile.scm
 
 # Debug files
 *.dSYM/
