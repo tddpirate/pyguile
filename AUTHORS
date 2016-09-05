@@ -2,3 +2,7 @@ tddpirate: Omer Zak <w1@zak.co.il>
 #
 # Created the PyGuile package.
 #
+cbaines: Christopher Baines https://github.com/cbaines
+#
+# Made it possible to build a GNU Guix package for pyguile.
+#
