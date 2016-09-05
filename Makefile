@@ -111,7 +111,7 @@ distclean: clean
 # Test and coverage analysis
 
 check: $(TARGETS)
-	$(PERL) $(TEST_LIBDIRS) $(RUN_GUILE_TESTS) $(TEST_FILES)
+	LD_LIBRARY_PATH=.:$(LD_LIBRARY_PATH) $(PERL) $(TEST_LIBDIRS) $(RUN_GUILE_TESTS) $(TEST_FILES)
 
 gcov.out:
 	gcov -a -l -p *.c
@@ -119,7 +119,7 @@ gcov.out:
 	cat *.gcov > gcov.out
 
 manualcheck: $(TARGETS)
-	for testfile in $(TEST_FILES); do guile -s $$testfile; done
+	for testfile in $(TEST_FILES); do LD_LIBRARY_PATH=.:$(LD_LIBRARY_PATH) guile -s $$testfile; done
 
 ########################################################################
 # Build dependencies
